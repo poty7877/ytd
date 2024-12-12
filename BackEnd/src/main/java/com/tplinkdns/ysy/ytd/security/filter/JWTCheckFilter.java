@@ -79,7 +79,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         log.info("URI 체크 :" + path);
 
         // 나중에 필요한 부분만 설정하도록.
-        if(path.startsWith("/api")) {
+        if(path.startsWith("/")) {
             return true;
         }
 

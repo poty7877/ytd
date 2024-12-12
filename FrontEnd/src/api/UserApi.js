@@ -1,20 +1,23 @@
 import axios from "axios";
 
-const API_SERVER_HOST = `http://localhost:8005/api`
-const userHost = `${API_SERVER_HOST}/user`
+const API_SERVER_HOST = `http://localhost:8005`
+const userHost = `${API_SERVER_HOST}/api/user`
 const header = {headers: {"Content-Type": "application/x-www-form-urlencoded"}};
 const jsonHeader = {headers: {"Content-Type": "application/json"}}
 
+
+// 로그인
 export const login = async (loginParam) => {
     const data = new URLSearchParams({
-        username : loginParam.username,
-        password : loginParam.password,
+        username: loginParam.username,
+        password: loginParam.password,
     })
     const response = await axios.post(`${userHost}/login`, data, header);
-    
+
     return response.data;
 }
 
+// 회원가입
 export const sign = async (userDTO) => {
     try {
         const response = await axios.post(`${userHost}/sign`, userDTO, jsonHeader);
@@ -27,4 +30,28 @@ export const sign = async (userDTO) => {
         // 기타 에러 처리
         return {success: false, errors: {message: "API 연결 오류"}};
     }
+}
+
+// 이메일 중복 확인
+export const checkEmail = async (email) => {
+    const response = await axios.post(`${userHost}/checkEmail/${email}`);
+    return response.data;
+}
+
+// 닉네임 중복 확인
+export const checkNickName = async (nickName) => {
+    const response = await axios.post(`${userHost}/checkNickName/${nickName}`);
+    return response.data;
+}
+
+// 인증번호 보내기
+export const sendEmail = async (email) => {
+    const response = await axios.post(`${API_SERVER_HOST}/sendEmail`, {email:email}, jsonHeader);
+    return response.data;
+}
+
+// 이메일 인증
+export const verifyEmail = async (formData) => {
+    const response = await axios.post(`${API_SERVER_HOST}/verifyCode`, formData, jsonHeader);
+    return response.data;
 }
