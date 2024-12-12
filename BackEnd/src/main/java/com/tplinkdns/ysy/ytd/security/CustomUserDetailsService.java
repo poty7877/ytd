@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("================LoadUserByUserName 실행===============");
-
+        log.info("정보 확인 : " + username);
         User user = userRepository.getWithRoles(username);
 
         if(user == null) {
