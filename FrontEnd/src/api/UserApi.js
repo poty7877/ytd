@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const API_SERVER_HOST = `http://localhost:8005`
+export const API_SERVER_HOST = `http://localhost:8005`
 const userHost = `${API_SERVER_HOST}/api/user`
 const header = {headers: {"Content-Type": "application/x-www-form-urlencoded"}};
 const jsonHeader = {headers: {"Content-Type": "application/json"}}
 
 
 // 로그인
-export const login = async (loginParam) => {
+export const loginApi = async (loginParam) => {
     const data = new URLSearchParams({
         username: loginParam.username,
         password: loginParam.password,
@@ -30,6 +30,26 @@ export const sign = async (userDTO) => {
         // 기타 에러 처리
         return {success: false, errors: {message: "API 연결 오류"}};
     }
+}
+
+// 정보수정
+export const modifyUser = async (userDTO) => {
+    try {
+        const response = await axios.post(`${userHost}/${userDTO.mno}`, userDTO, jsonHeader);
+        return {success: true, data: response.data};
+    } catch (error) {
+        if (error.response && error.response.data) {
+            return {success: false, errors: error.response.data};
+        }
+        // 기타 에러 처리
+        return {success: false, errors: {message: "API 연결 오류"}};
+    }
+}
+
+// 회원탈퇴
+export const removeUser = async (mno) => {
+    const response = await axios.delete(`${userHost}/${mno}`);
+    return response.data;
 }
 
 // 이메일 중복 확인
