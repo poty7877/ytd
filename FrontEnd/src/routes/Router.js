@@ -21,6 +21,7 @@ const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
 const Login = lazy(() => import("../pages/user/LoginPage"))
 const Agree = lazy(() => import("../pages/user/AgreePage"));
 const Sign = lazy(() => import("../pages/user/SignPage"));
+const Modify = lazy(() => import("../pages/user/ModifyPage"));
 
 /*****Routes******/
 
@@ -40,6 +41,7 @@ const ThemeRoutes = [
             {path: "/table", exact: true, element: <Tables/>},
             {path: "/forms", exact: true, element: <Forms/>},
             {path: "/breadcrumbs", exact: true, element: <Breadcrumbs/>},
+            {path: "/modify", exact: true, element: <Modify/>},
         ],
     },
     { path: "/login", element: <Login/> },

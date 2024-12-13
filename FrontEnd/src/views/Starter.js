@@ -8,6 +8,7 @@ import bg1 from "../assets/images/bg/bg1.jpg";
 import bg2 from "../assets/images/bg/bg2.jpg";
 import bg3 from "../assets/images/bg/bg3.jpg";
 import bg4 from "../assets/images/bg/bg4.jpg";
+import UserMove from "../hook/UserMove";
 
 const BlogData = [
   {
@@ -45,6 +46,13 @@ const BlogData = [
 ];
 
 const Starter = () => {
+
+  const {isLogin, moveToLoginReturn} = UserMove();
+
+  if(!isLogin){
+    return moveToLoginReturn()
+  }
+
   return (
     <div>
       {/***Top Cards***/}
