@@ -8,6 +8,9 @@ public interface UserService {
     // C
     void register(UserRequestDTO userDTO);
 
+    // R
+    UserRequestDTO get(String email);
+
     // U
     void modify(UserRequestDTO userDTO);
 

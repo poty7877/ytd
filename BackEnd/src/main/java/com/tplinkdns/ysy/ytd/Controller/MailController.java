@@ -22,6 +22,13 @@ public class MailController {
         return ResponseEntity.ok("SUCCESS");
     }
 
+    @ResponseBody
+    @PostMapping("/sendEmail2")
+    public ResponseEntity<String> emailCheck2(@RequestBody MailDTO mailDTO) throws MessagingException {
+        mailService.sendSimpleMessage2(mailDTO.getEmail());
+        return ResponseEntity.ok("SUCCESS");
+    }
+
     // 인증번호 검증
     @PostMapping("/verifyCode")
     public ResponseEntity<String> verifyCode(@RequestBody MailDTO mailDTO) {

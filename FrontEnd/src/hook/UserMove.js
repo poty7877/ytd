@@ -1,6 +1,6 @@
 import {createSearchParams, Navigate, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {loginPostAsync} from "../slices/loginSlice";
+import {loginPostAsync, logout} from "../slices/loginSlice";
 
 const UserMove = () => {
 
@@ -36,6 +36,18 @@ const UserMove = () => {
         return <Navigate replace to={"/login"}/>
     }
 
+    const moveToFindPw = () => {
+        navigate({pathname: "/findPw"}, {replace: true})
+    }
+
+    const doLogout = () => {
+        dispatch(logout())
+    }
+
+    const moveToModify = () => {
+        navigate({pathname: "/modify"}, {replace:true})
+    }
+
     const exceptionHandle = (ex => {
         console.log("Exception")
         console.log(ex)
@@ -65,7 +77,10 @@ const UserMove = () => {
             moveToPath,
             moveToLogin,
             moveToLoginReturn,
-            exceptionHandle
+            exceptionHandle,
+            moveToFindPw,
+            doLogout,
+            moveToModify
         }
     );
 };

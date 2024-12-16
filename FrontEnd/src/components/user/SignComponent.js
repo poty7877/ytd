@@ -1,6 +1,7 @@
 import {Button, Card, CardBody, CardFooter, CardTitle, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import React, {useState} from "react";
 import {checkEmail, checkNickName, sendEmail, sign, verifyEmail} from "../../api/UserApi";
+import UserMove from "../../hook/UserMove";
 
 const SignComponent = () => {
 
@@ -27,6 +28,9 @@ const SignComponent = () => {
 
     // 이메일 인증 확인용
     const [verifyResult, setVerifyResult] = useState(false);
+
+    // 이동용
+    const {moveToLogin} = UserMove();
 
     // 이메일 비밀번호 닉네임
     const handleChange = (e) => {
@@ -91,6 +95,7 @@ const SignComponent = () => {
         const response = await sign(formData);
         if (response.success) {
             console.log(response);
+            moveToLogin();
         } else {
             setError(response.errors);
         }
@@ -168,7 +173,7 @@ const SignComponent = () => {
                                         {error.nickName &&
                                             <small style={{color: "red"}}>{error.nickName}</small>
                                         }
-                                        {!checkNickNameResult ?
+                                        { !checkNickNameResult ?
                                             <small style={{color: "red"}}>사용중인 닉네임 입니다.</small>
                                             : <small style={{color: "blue"}}>사용가능한 닉네임 입니다.</small>
                                         }

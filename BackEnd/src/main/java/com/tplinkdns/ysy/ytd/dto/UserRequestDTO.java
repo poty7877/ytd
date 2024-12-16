@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,4 +30,5 @@ public class UserRequestDTO {
     @Size(min = 8, max = 16, message = "비밀번호는 8~16자 사이여야 합니다.")
     private String pw;
 
+    private boolean social;
 }

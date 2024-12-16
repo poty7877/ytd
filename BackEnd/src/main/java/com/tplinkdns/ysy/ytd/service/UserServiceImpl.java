@@ -30,6 +30,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserRequestDTO get(String email) {
+        User user = userRepository.findByEmail(email);
+        UserRequestDTO userDTO = entityToDto(user);
+        return userDTO;
+    }
+
+    @Override
     public void modify(UserRequestDTO userDTO) {
         log.info("수정 서비스");
         User user = dtoToEntity(userDTO);
@@ -62,6 +69,15 @@ public class UserServiceImpl implements UserService {
                 .email(userDTO.getEmail())
                 .pw(userDTO.getPw())
                 .mno(userDTO.getMno())
+                .build();
+    }
+
+    public UserRequestDTO entityToDto(User user) {
+        return UserRequestDTO.builder()
+                .mno(user.getMno())
+                .nickName(user.getNickName())
+                .email(user.getEmail())
+                .pw(user.getPw())
                 .build();
     }
 }

@@ -1,12 +1,14 @@
 package com.tplinkdns.ysy.ytd.service;
 
 
+import com.tplinkdns.ysy.ytd.dto.UserRequestDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +23,7 @@ public class MailService {
 
     private static final String senderEmail = "kuc00623@gmail.com";
     private final JavaMailSender javaMailSender;
+    private final UserService userService;
 
     private final Map<String, String> verificationCodes = new ConcurrentHashMap<String, String>();
 
@@ -59,7 +62,8 @@ public class MailService {
         return message;
     }
 
-    public String sendSimpleMessage(String sendEmail) throws MessagingException {
+    @Async
+    public void sendSimpleMessage(String sendEmail) throws MessagingException {
         String number = createNumber();
         MimeMessage message = createMail(sendEmail, number);
 
@@ -72,7 +76,6 @@ public class MailService {
             throw new IllegalArgumentException("메일 발송 중 오류가 발생했습니다.");
         }
 
-        return number;
     }
 
     public boolean verifyCode(String email, String code) {
@@ -92,5 +95,38 @@ public class MailService {
             expirationTimes.remove(email);
         }
         return isValid;
+    }
+
+    public MimeMessage createMail2(String mail, String number) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+
+        message.setFrom(senderEmail);
+        message.setRecipients(MimeMessage.RecipientType.TO, mail);
+        message.setSubject("ytd 비밀번호 찾기");
+        String body = "";
+        body += "<h3>임시 비밀번호가 발행되었습니다.</h3>";
+        body += "<h1>" + number + "</h1>";
+        body += "<h3>감사합니다.</h3>";
+        message.setText(body, "UTF-8", "html");
+
+        return message;
+    }
+
+    @Async
+    public void sendSimpleMessage2(String sendEmail) throws MessagingException {
+        String number = createNumber();
+        MimeMessage message = createMail2(sendEmail, number);
+        UserRequestDTO userDTO = userService.get(sendEmail);
+        userDTO.setPw(number);
+        userService.modify(userDTO);
+        try {
+            javaMailSender.send(message);
+            verificationCodes.put(sendEmail, number);
+            expirationTimes.put(sendEmail, System.currentTimeMillis() + EXPIRATION_TIME);
+        } catch (MailException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("메일 발송 중 오류가 발생했습니다.");
+        }
+
     }
 }

@@ -22,6 +22,7 @@ const Login = lazy(() => import("../pages/user/LoginPage"))
 const Agree = lazy(() => import("../pages/user/AgreePage"));
 const Sign = lazy(() => import("../pages/user/SignPage"));
 const Modify = lazy(() => import("../pages/user/ModifyPage"));
+const FindPw = lazy(() => import("../pages/user/FindPwPage"))
 
 /*****Routes******/
 
@@ -47,6 +48,7 @@ const ThemeRoutes = [
     { path: "/login", element: <Login/> },
     { path: "/agree", element: <Agree/> },
     { path: "/sign", element: <Sign/> },
+    { path: "/findPw", element: <FindPw/>}
 ];
 
 export default ThemeRoutes;

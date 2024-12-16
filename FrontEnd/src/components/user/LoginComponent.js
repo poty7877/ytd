@@ -18,7 +18,7 @@ const LoginComponent = () => {
 
     const [loginParam, setLoginParam] = useState({});
     const [error, setError] = useState({});
-    const {moveToAgree, doLogin, moveToPath} = UserMove();
+    const {moveToAgree, doLogin, moveToPath, moveToFindPw} = UserMove();
 
     const handleChange = (e) => {
         setLoginParam(prevState => ({...prevState, [e.target.name]: e.target.value}));
@@ -76,8 +76,7 @@ const LoginComponent = () => {
                         </CardBody>
                         <CardFooter>
                             <div className="footer-links">
-                                <span className="footer-link">아이디 찾기</span>
-                                <span className="footer-link">비밀번호 찾기</span>
+                                <span className="footer-link" onClick={moveToFindPw}>비밀번호 찾기</span>
                                 <span className="footer-link" onClick={moveToAgree}>회원가입</span>
                             </div>
                         </CardFooter>
