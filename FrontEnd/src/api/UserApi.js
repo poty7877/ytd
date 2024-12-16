@@ -35,7 +35,7 @@ export const sign = async (userDTO) => {
 // 정보수정
 export const modifyUser = async (userDTO) => {
     try {
-        const response = await axios.post(`${userHost}/${userDTO.mno}`, userDTO, jsonHeader);
+        const response = await axios.put(`${userHost}/${userDTO.mno}`, userDTO, jsonHeader);
         return {success: true, data: response.data};
     } catch (error) {
         if (error.response && error.response.data) {
@@ -67,6 +67,12 @@ export const checkNickName = async (nickName) => {
 // 인증번호 보내기
 export const sendEmail = async (email) => {
     const response = await axios.post(`${API_SERVER_HOST}/sendEmail`, {email:email}, jsonHeader);
+    return response.data;
+}
+
+// 인증번호 보내기
+export const sendEmail2 = async (email) => {
+    const response = await axios.post(`${API_SERVER_HOST}/sendEmail2`, {email:email}, jsonHeader);
     return response.data;
 }
 

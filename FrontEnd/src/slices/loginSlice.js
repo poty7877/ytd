@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {loginApi} from "../api/UserApi";
-import {getCookie, setCookie} from "../util/cookieUtil";
+import {getCookie, removeCookie, setCookie} from "../util/cookieUtil";
 
 const initState = {
     email: ""
@@ -27,6 +27,7 @@ const loginSlice = createSlice({
         },
         logout: (state, action) => {
             console.log("logout");
+            removeCookie("user")
             return {};
         }
     },

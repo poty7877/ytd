@@ -28,6 +28,8 @@ public class User {
     private String nickName; // 닉네임
 
     private boolean social; // 소셜회원 여부
+    
+    private LocalDateTime created; // 생성일
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default

@@ -30,21 +30,23 @@ public class UserDTO extends User {
 
     private List<String> roleNames = new ArrayList<>();
 
-
-    public UserDTO(String email, String pw, String nickName, boolean social, List<String> roleNames) {
+    public UserDTO(Long mno, String email, String pw, String nickName, boolean social,List<String> roleNames) {
         super(email, pw, roleNames.stream().map(str -> new SimpleGrantedAuthority("ROLE_"+str)).toList());
 
+        this.mno = mno;
         this.email = email;
         this.pw = pw;
         this.social = social;
         this.nickName = nickName;
         this.roleNames = roleNames;
+
     }
 
     // 현재 사용자의 정보를 Map타입으로 반환하도록 구성 함
     // JWT 문자열 생성시 사용할 예정.
     public Map<String, Object> getClaims() {
         Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("mno", mno);
         dataMap.put("email", email);
         dataMap.put("nickName", nickName);
         dataMap.put("social", social);

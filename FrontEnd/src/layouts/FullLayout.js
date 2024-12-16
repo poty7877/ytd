@@ -6,7 +6,7 @@ import UserMove from "../hook/UserMove";
 
 const FullLayout = () => {
 
-    const {isLogin, moveToLoginReturn, exceptionHandle} = UserMove();
+    const {isLogin, moveToLoginReturn} = UserMove();
 
     if(!isLogin){
         return moveToLoginReturn()
