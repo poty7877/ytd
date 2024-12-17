@@ -20,3 +20,12 @@
 - 해결 : Spring Boot의 Mail Service에서 @Async를 추가해 비동기적으로 처리 하여 사용자로 하여금 즉각적으로 반응할수있게 변경
 - 그와 동시에 Loader를 추가하여, api 통신 동안 버튼중복클릭 등, 오류 발생 줄임.
 
+## 2024-12-17
+- 소셜로그인 및 자동 회원가입 구현 (카카오, 구글, 네이버)
+
+### Trouble Shooting
+- 문제 : 네이버만, accessToken 요청시 Cors오류 발생
+- 해결 : 기존 Front -> Naver -> Front 요청을
+- Front -> Back -> Naver -> Back -> Front
+- 프록시를 사용하지 않고, 백엔드에서 외부 API를 호출하는 방식으로 변경
+- 백엔드에서 NaverAPI와의 통신을 처리함으로써, 클라이언트 측에서 발생할 수 있는 보안이슈를 최소화.
