@@ -22,8 +22,12 @@ const loginSlice = createSlice({
     reducers: {
         login: (state, action) => {
             console.log("login");
-            const data = action.payload;
-            return {email: data.email};
+
+            const payload = action.payload;
+
+            setCookie("user", JSON.stringify(payload), 1);
+
+            return payload;
         },
         logout: (state, action) => {
             console.log("logout");
