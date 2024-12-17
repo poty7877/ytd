@@ -23,7 +23,9 @@ const Agree = lazy(() => import("../pages/user/AgreePage"));
 const Sign = lazy(() => import("../pages/user/SignPage"));
 const Modify = lazy(() => import("../pages/user/ModifyPage"));
 const FindPw = lazy(() => import("../pages/user/FindPwPage"))
-
+const Kakao = lazy(() => import("../pages/user/KakaoRedirectPage"));
+const Google = lazy(() => import("../pages/user/GoogleRedirectPage"));
+const Naver = lazy(() => import("../pages/user/NaverRedirectPage"));
 /*****Routes******/
 
 const ThemeRoutes = [
@@ -48,7 +50,10 @@ const ThemeRoutes = [
     { path: "/login", element: <Login/> },
     { path: "/agree", element: <Agree/> },
     { path: "/sign", element: <Sign/> },
-    { path: "/findPw", element: <FindPw/>}
+    { path: "/findPw", element: <FindPw/>},
+    { path: "/member/kakao", element: <Kakao/> },
+    { path: "/member/google", element: <Google/>},
+    { path: "/member/naver", element: <Naver/>}
 ];
 
 export default ThemeRoutes;

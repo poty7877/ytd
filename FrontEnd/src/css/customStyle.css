@@ -23,3 +23,27 @@
     color: #0056b3; /* 호버 시 어두운 파란색 */
     text-decoration: underline; /* 호버 시 밑줄 추가 */
 }
+
+
+/* SocialLoginButtons.css */
+.social-login-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* 버튼 간의 간격 */
+}
+
+.social-login-btn {
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.social-login-btn img {
+    width: 100%;
+    height: auto;  /* 이미지 크기 조정 */
+}
+
+.social-login-btn:hover {
+    opacity: 0.8; /* 버튼에 마우스를 올렸을 때 약간 투명하게 */
+}
